@@ -117,6 +117,7 @@ function Card({ card, index, storage }: CardProps) {
                       <input
                         placeholder='Edit title'
                         className='w-[150px] rounded-md px-1'
+                        defaultValue={card.title}
                         {...register('title')}
                       />
                       <label htmlFor='priority' className='mt-2.5 text-xs '>
@@ -125,6 +126,7 @@ function Card({ card, index, storage }: CardProps) {
                       <input
                         placeholder='Edit description'
                         className='w-[150px] rounded-md px-1'
+                        defaultValue={card.description}
                         {...register('description')}
                       />
                       <label htmlFor='priority' className='mt-2.5 text-xs'>
