@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -31,9 +32,16 @@ export default function Register() {
 
   return (
     <main className='flex min-h-screen w-full items-center justify-center bg-[#F6F6F6]'>
+      <Image
+        src='/logo.jpg'
+        alt='logo'
+        width={60}
+        height={60}
+        className='absolute left-5 top-5 md:left-10 md:top-10'
+      />
       <FormProvider {...methods}>
         <form
-          className='flex w-[500px] flex-col gap-5'
+          className='flex w-[300px] flex-col gap-5 md:w-[500px]'
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className='text-6xl font-bold text-gray-900'>Register</h1>
