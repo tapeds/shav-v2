@@ -10,6 +10,9 @@ const josefin = Josefin_Sans({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'SHAV',
   description: 'Task Managment App for your needs',
+  twitter: {
+    card: 'summary_large_image',
+  },
 };
 
 export default function RootLayout({
