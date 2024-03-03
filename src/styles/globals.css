@@ -16,6 +16,16 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,4 +34,30 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.container {
+  width: 1200px;
+  height: 450px;
+  padding: 12px;
+}
+
+.container-list {
+  width: 25%;
+  height: 100%;
+  padding: 12px;
+  row-gap: 8px;
+}
+
+.list-title {
+  text-align: center;
+}
+
+.list-card {
+  gap: 6px;
+  overflow: auto;
+}
+
+.add-button {
+  gap: 8px;
 }

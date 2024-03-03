@@ -20,15 +20,17 @@ function List({ title, className }: ListProps) {
       <Modal open={open} setOpen={setOpen} storage={title} />
       <div
         className={clsxm(
-          'flex h-max w-1/4 flex-col justify-between gap-y-2 p-3',
+          'container-list flex h-full w-1/4 flex-col justify-between gap-y-2 p-3',
           className,
         )}
       >
-        <div className='text-center font-semibold text-slate-50'>{title}</div>
+        <div className='list-title text-center font-semibold text-slate-50'>
+          {title}
+        </div>
         <Droppable droppableId={title}>
           {(provided) => (
             <div
-              className='flex h-full flex-col gap-y-1.5 overflow-auto rounded-lg'
+              className='list-card flex h-full flex-col overflow-auto rounded-lg'
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -51,7 +53,7 @@ function List({ title, className }: ListProps) {
           )}
         </Droppable>
         <div
-          className='flex items-center gap-2 text-slate-50 hover:cursor-pointer'
+          className='add-button flex items-center text-slate-50 hover:cursor-pointer'
           onClick={() => setOpen(!open)}
         >
           <FaPlus className='size-4' /> Add Item

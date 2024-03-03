@@ -43,7 +43,7 @@ export default function DragDrop() {
 
   return (
     <DragDropContext onDragEnd={OnDragEnd}>
-      <div className='flex h-[450px] w-[1200px] gap-3 divide-x-2 divide-gray-600 rounded-xl bg-gray-900 p-3'>
+      <div className='container flex gap-3 divide-x-2 divide-gray-600 rounded-xl bg-gray-900 p-3'>
         <List title='To Do' className='rounded-l-md' />
         <List title='In Progress' />
         <List title='In Revision' />

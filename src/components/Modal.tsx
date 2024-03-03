@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { IoClose } from 'react-icons/io5';
@@ -20,19 +21,28 @@ const customStyles = {
 
 function CustomModal({ open, setOpen, storage }: ModalProps) {
   const methods = useForm<ModalTask>();
+  const queryClient = useQueryClient();
 
-  const { register, handleSubmit } = methods;
+  const { register, handleSubmit, reset } = methods;
 
   const onSubmit = (formData: ModalTask) => {
-    PostTask({
+    const data = {
       title: formData.title,
       description: formData.description,
       dueDate: formData.dueDate,
       tags: [formData.priority],
       status: storage,
-    })
+    };
+    PostTask(data)
       .catch(() => toast.error('Failed to add task'))
-      .then(() => toast.success('Task added'));
+      .then(() => {
+        toast.success('Task added');
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        /* @ts-expect-error */
+        queryClient.invalidateQueries('/task');
+        reset();
+      });
+
     setOpen(false);
   };
 

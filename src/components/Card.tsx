@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -12,6 +13,7 @@ import { CardProps, EditTaskProps } from '@/types/card';
 
 function Card({ card, index, storage }: CardProps) {
   const [edit, setEdit] = useState(false);
+  const queryClient = useQueryClient();
 
   const methods = useForm<EditTaskProps>();
   const { register, handleSubmit } = methods;
@@ -19,13 +21,23 @@ function Card({ card, index, storage }: CardProps) {
   const onClick = () => {
     DeleteTask(card._id)
       .catch(() => toast.error('Failed to delete task'))
-      .then(() => toast.success('Task deleted'));
+      .then(() => {
+        toast.success('Task deleted');
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        /* @ts-expect-error */
+        queryClient.invalidateQueries('/task');
+      });
   };
 
   const editData = (formData: EditTaskProps) => {
     EditTask(card._id, formData, card)
       .catch(() => toast.error('Failed to edit task'))
-      .then(() => toast.success('Task edited'));
+      .then(() => {
+        toast.success('Task edited');
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        /* @ts-expect-error */
+        queryClient.invalidateQueries('/task');
+      });
   };
 
   function getDaysFromToday(dateString: string) {
@@ -81,17 +93,17 @@ function Card({ card, index, storage }: CardProps) {
                           days left
                         </p>
                         {card.tags[0] === 'Low' && (
-                          <div className='w-fit rounded-full bg-green-200 px-3 py-0.5 text-sm'>
+                          <div className='w-fit rounded-full bg-green-300 px-3 py-0.5 text-sm'>
                             Low
                           </div>
                         )}
                         {card.tags[0] === 'Medium' && (
-                          <div className='w-fit rounded-full bg-yellow-200 px-3 py-0.5 text-sm'>
+                          <div className='w-fit rounded-full bg-yellow-300 px-3 py-0.5 text-sm'>
                             Medium
                           </div>
                         )}
                         {card.tags[0] === 'High' && (
-                          <div className='w-fit rounded-full bg-red-200 px-3 py-0.5 text-sm'>
+                          <div className='w-fit rounded-full bg-red-300 px-3 py-0.5 text-sm'>
                             High
                           </div>
                         )}

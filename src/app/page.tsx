@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <main className='h-full w-full overflow-hidden'>
-      <div className='flex h-full min-h-screen w-full flex-col items-start justify-center gap-5 bg-[#F6F6F6] md:items-center'>
+      <div className='flex h-full min-h-screen w-full flex-col items-start justify-center gap-8 bg-[#F6F6F6] md:items-center'>
         <div className='flex flex-col md:items-center'>
           <h1 className='px-5 text-4xl font-bold text-gray-900'>SHAV</h1>
           <h2 className='px-5 text-2xl font-bold text-gray-900'>
