@@ -1,13 +1,15 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { FaPlus } from 'react-icons/fa6';
 
 import Card from '@/components/Card';
-import Modal from '@/components/Modal';
 import clsxm from '@/lib/clsxm';
 import { useListStore } from '@/store/useListStore';
 import { ListProps } from '@/types/list';
 import { Task } from '@/types/task';
+
+const Modal = dynamic(() => import('@/components/Modal'));
 
 function List({ title, className }: ListProps) {
   const [open, setOpen] = useState(false);
