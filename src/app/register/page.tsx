@@ -1,9 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { ImSpinner2 } from 'react-icons/im';
 
 import Input from '@/components/Input';
@@ -14,20 +12,11 @@ import { RegisterProps } from '@/types/form';
 export default function Register() {
   const methods = useForm<RegisterProps>();
   const { mutateAsync, isPending } = useRegister();
-  const router = useRouter();
 
   const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<RegisterProps> = (data) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /* @ts-expect-error */
-    mutateAsync(data, {
-      onError: (error) => toast.error(error.message),
-      onSuccess: () => {
-        toast.success('Registered successfully');
-        router.push('/login');
-      },
-    });
+    mutateAsync(data);
   };
 
   return (

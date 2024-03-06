@@ -25,3 +25,10 @@ export type loginResponse = {
   refreshToken: string;
   resultCode: string;
 };
+
+export type registerResponse = {
+  resultMessage: {
+    en: string;
+  };
+  resultCode: string;
+};
