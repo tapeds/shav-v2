@@ -51,6 +51,7 @@ export default function Login() {
               id='password'
               label='Password'
               placeholder='Password'
+              type='password'
               validation={{
                 required: 'Password cannot be empty',
                 minLength: {

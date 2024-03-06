@@ -1,7 +1,10 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { deleteCookie } from 'cookies-next';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import DragDrop from '@/container/DragDrop';
 import { useTaskFilter } from '@/hooks/task';
@@ -15,6 +18,8 @@ export default function App() {
   });
   const { setLists } = useListStore();
   useTaskFilter(data, setLists);
+
+  const router = useRouter();
 
   return (
     <main className='h-full w-full overflow-hidden bg-[#F6F6F6]'>
@@ -36,9 +41,19 @@ export default function App() {
           <DragDrop />
         </div>
       </div>
-      <div className='flex h-10 flex-col items-center justify-center bg-[#F6F6F6]'>
-        <p className='text-base font-medium text-gray-900'>
-          Farrell Matthew Lim - 5025221258
+      <div className='flex h-10 items-center justify-center divide-x-2 divide-gray-900 bg-[#F6F6F6]'>
+        <p className='pr-5 text-base font-medium text-gray-900'>
+          Farrell Matthew Lim
+        </p>
+        <p
+          className='pl-5 text-base font-medium text-red-500 hover:cursor-pointer'
+          onClick={() => {
+            toast.success('Logged out successfully');
+            deleteCookie('accessToken');
+            router.push('/login');
+          }}
+        >
+          Logout
         </p>
       </div>
     </main>
