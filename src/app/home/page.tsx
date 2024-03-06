@@ -28,7 +28,7 @@ export default function App() {
         alt='logo'
         width={60}
         height={60}
-        className='absolute right-5 top-5 md:left-10 md:top-10'
+        className='absolute right-5 top-5 hover:cursor-pointer md:left-10 md:top-10'
       />
       <div className='flex h-full min-h-screen w-full flex-col items-start justify-center gap-8 bg-[#F6F6F6] pb-10 pt-20 md:items-center'>
         <div className='flex flex-col md:items-center'>

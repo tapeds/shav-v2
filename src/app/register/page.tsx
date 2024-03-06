@@ -26,7 +26,7 @@ export default function Register() {
         alt='logo'
         width={60}
         height={60}
-        className='absolute left-5 top-5 md:left-10 md:top-10'
+        className='absolute left-5 top-5 hover:cursor-pointer md:left-10 md:top-10'
       />
       <FormProvider {...methods}>
         <form
