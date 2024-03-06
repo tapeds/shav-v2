@@ -1,16 +1,33 @@
 import { useMutation } from '@tanstack/react-query';
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import api from '@/lib/api';
-import { LoginProps, RegisterProps } from '@/types/form';
+import { ApiError } from '@/types/api';
+import { LoginProps, loginResponse, RegisterProps } from '@/types/form';
 
 export const useLogin = () => {
-  const { isPending, mutateAsync } = useMutation<LoginProps>({
-    mutationFn: async (data) => {
-      return await api.post('/user/login', data);
+  const router = useRouter();
+  const { isPending, data, mutateAsync } = useMutation<
+    loginResponse,
+    ApiError,
+    LoginProps
+  >({
+    mutationFn: async (data: LoginProps) => {
+      const { data: responseData } = await api.post('/user/login', data);
+
+      return responseData;
+    },
+    onError: (error) => toast.error(error.message),
+    onSuccess: (responseData) => {
+      toast.success('Logged in successfully');
+      setCookie('accessToken', responseData.accessToken);
+      router.push('/home');
     },
   });
 
-  return { isPending, mutateAsync };
+  return { isPending, data, mutateAsync };
 };
 
 export const useRegister = () => {

@@ -1,11 +1,11 @@
 import axios, { AxiosError } from 'axios';
+import { getCookie } from 'cookies-next';
 import { GetServerSidePropsContext } from 'next/types';
 
 import { UninterceptedApiError } from '@/types/api';
 const context = <GetServerSidePropsContext>{};
 
 export const baseURL = process.env.NEXT_PUBLIC_API_URL;
-const KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export const api = axios.create({
   baseURL,
@@ -21,12 +21,18 @@ const isBrowser = typeof window !== 'undefined';
 
 api.interceptors.request.use(function (config) {
   if (config.headers) {
+    let token: string | undefined;
+
     if (!isBrowser) {
       if (!context)
         throw 'Api Context not found. You must call `setApiContext(context)` before calling api on server-side';
+
+      token = context.req.cookies.accessToken;
+    } else {
+      token = getCookie('accessToken');
     }
 
-    config.headers.Authorization = `Bearer ${KEY}`;
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
   }
 
   return config;

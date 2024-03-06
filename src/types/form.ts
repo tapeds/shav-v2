@@ -18,3 +18,9 @@ export type RegisterProps = {
   email: string;
   password: string;
 };
+
+export type loginResponse = {
+  accessToken: string;
+  refreshToken: string;
+  resultCode: string;
+};

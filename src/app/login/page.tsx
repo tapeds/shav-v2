@@ -1,10 +1,7 @@
 'use client';
 
-import { setCookie } from 'cookies-next';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { ImSpinner2 } from 'react-icons/im';
 
 import Input from '@/components/Input';
@@ -15,21 +12,11 @@ import { LoginProps } from '@/types/form';
 export default function Login() {
   const methods = useForm<LoginProps>();
   const { mutateAsync, isPending } = useLogin();
-  const router = useRouter();
 
   const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<LoginProps> = (data) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /* @ts-expect-error */
-    mutateAsync(data, {
-      onError: (error) => toast.error(error.message),
-      onSuccess: () => {
-        toast.success('Logged in successfully');
-        setCookie('logged', 'true');
-        router.push('/auth');
-      },
-    });
+    mutateAsync(data);
   };
 
   return (
